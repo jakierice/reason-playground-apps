@@ -1,6 +1,10 @@
 [%bs.raw {|require('./index.css')|}];
 
-ReactDOMRe.renderToElementWithId(
-  <TodoApp />,
-  "root",
-);
+module App = {
+  [@react.component]
+  let make = () => {
+    <div className="App"> <TodoList /> <PomodoroTimer /> </div>;
+  };
+};
+
+ReactDOMRe.renderToElementWithId(<App />, "root");
