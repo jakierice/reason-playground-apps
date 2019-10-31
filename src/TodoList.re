@@ -85,7 +85,7 @@ let make = () => {
   let itemCountLabel = itemCount == 1 ? " item" : " items";
   <div className="TodoList">
     <div className="Card">
-      <h1> {"Shit Jakie's Gotta Do" |> React.string} </h1>
+      <h2> {"Shit Jakie's Gotta Do" |> React.string} </h2>
       // <button onClick={_event => dispatch(AddItem)}>
       //   {"Add a todo" |> React.string}
       // </button>
