@@ -1,0 +1,47 @@
+body, div {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+body {
+font: 14px "Century Gothic", Futura, sans-serif;
+}
+
+#root {
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.App {
+  width: 280px;
+  max-height: 600px;
+  flex: 1;
+  box-shadow: 0 2px 15px #ccc;
+  margin: 10px;
+  align-items: stretch;
+}
+
+.Title {
+  font-size: 20px;
+  align-items: center;
+  padding: 20px;
+}
+
+.Items {
+  margin: 10px 0;
+  text-align: center;
+  flex: 1;
+  overflow: auto;
+}
+
+.Footer {
+  align-items: flex-start;
+  padding: 5px 10px;
+}
