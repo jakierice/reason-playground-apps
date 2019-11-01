@@ -1,0 +1,4 @@
+.EmphasizedText {
+  color: var(--yellow);
+  text-decoration: underline;
+}
