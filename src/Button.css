@@ -1,0 +1,15 @@
+.Button {
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  background-color: var(--pink);
+  border: 2px solid var(--pink);
+  color: var(--white);
+  margin: 0 0.4rem 0.4rem 0;
+  padding: 0.4rem 0.8rem;
+}
+
+.Button--secondary {
+  background-color: transparent;
+  border: 2px solid var(--blue);
+  color: var(--blue);
+}

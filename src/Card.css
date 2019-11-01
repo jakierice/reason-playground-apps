@@ -1,11 +1,10 @@
 .Card {
+  align-items: flex-start;
+  border: 2px solid var(--white);
   display: flex;
   flex-direction: column;
-  width: 280px;
-  max-height: 600px;
   flex: 1;
-  box-shadow: 0 2px 15px #ccc;
   margin: 10px;
-  align-items: stretch;
+  max-height: 600px;
   padding: 1.2rem;
 }
