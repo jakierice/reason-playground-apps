@@ -1,4 +1,4 @@
-[%bs.raw {|require('./app.css')|}];
+[%bs.raw {|require('./TodoList.css')|}];
 
 type item = {
   id: int,
@@ -21,29 +21,6 @@ let lastId = ref(0);
 let newItem = text => {
   lastId := lastId^ + 1;
   {id: lastId^, title: text, completed: false};
-};
-
-let valueFromEvent = (event): string => event->ReactEvent.Form.target##value;
-
-module Input = {
-  type state = string;
-  [@react.component]
-  let make = (~onSubmit) => {
-    let (text, setText) =
-      React.useReducer((oldText, newText) => newText, "");
-    <input
-      value=text
-      type_="text"
-      placeholder="Write something to do"
-      onChange={event => setText(valueFromEvent(event))}
-      onKeyDown={event =>
-        if (ReactEvent.Keyboard.key(event) == "Enter") {
-          onSubmit(text);
-          setText("");
-        }
-      }
-    />;
-  };
 };
 
 module TodoItem = {
