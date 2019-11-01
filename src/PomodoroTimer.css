@@ -5,3 +5,9 @@
 .PomodoroTimer__Footer {
   display: flex;
 }
+
+@media (max-width: 640px) {
+  .PomodoroTimer {
+    grid-column: 1;
+  }
+}
