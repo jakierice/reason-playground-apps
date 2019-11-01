@@ -1,20 +1,26 @@
+[%bs.raw {|require('./Input.css')|}];
+
 let valueFromEvent = (event): string => event->ReactEvent.Form.target##value;
 
 type state = string;
 
 [@react.component]
-let make = (~onSubmit) => {
+let make = (~onSubmit, ~placeholder, ~label) => {
   let (text, setText) = React.useReducer((oldText, newText) => newText, "");
-  <input
-    value=text
-    type_="text"
-    placeholder="Write something to do"
-    onChange={event => setText(valueFromEvent(event))}
-    onKeyDown={event =>
-      if (ReactEvent.Keyboard.key(event) == "Enter") {
-        onSubmit(text);
-        setText("");
+  <label className="Label">
+    {label |> React.string}
+    <input
+      className="Input"
+      value=text
+      type_="text"
+      placeholder
+      onChange={event => setText(valueFromEvent(event))}
+      onKeyDown={event =>
+        if (ReactEvent.Keyboard.key(event) == "Enter") {
+          onSubmit(text);
+          setText("");
+        }
       }
-    }
-  />;
+    />
+  </label>;
 };

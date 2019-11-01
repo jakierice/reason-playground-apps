@@ -63,7 +63,7 @@ let make = () => {
   <div className="TodoList">
     <Card>
         <h2> {"Shit Jakie's Gotta Do" |> React.string} </h2>
-        <Input onSubmit={text => dispatch(AddItem(text))} />
+        <Input onSubmit={text => dispatch(AddItem(text))} placeholder="Write something to do..." label="Todo Item Name" />
         <div className="TodoItems">
           {List.map(
              item =>

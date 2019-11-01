@@ -43,17 +43,18 @@ let make = () => {
         switch (action) {
         | Start => {...state, isTicking: true}
         | Stop => {...state, isTicking: false}
-        | SetTimerMinutes(minutes) => {...state, remainingSeconds: minutes |> int_of_string |> convertMinutesToSeconds}
+        | SetTimerMinutes(minutes) => {
+            ...state,
+            remainingSeconds:
+              minutes |> int_of_string |> convertMinutesToSeconds,
+          }
         | Reset => {...state, remainingSeconds: 30}
         | Tick =>
           state.isTicking && state.remainingSeconds > 0
             ? {...state, remainingSeconds: state.remainingSeconds - 1} : state
         },
       // initial state
-      {
-        isTicking: false,
-        remainingSeconds: convertMinutesToSeconds(45),
-      },
+      {isTicking: false, remainingSeconds: convertMinutesToSeconds(45)},
     );
 
   React.useEffect0(() => {
@@ -69,7 +70,11 @@ let make = () => {
          ++ " on the clock!"
          |> React.string}
       </h2>
-      <Input onSubmit={(value) => dispatch(SetTimerMinutes(value))} />
+      <Input
+        onSubmit={value => dispatch(SetTimerMinutes(value))}
+        placeholder="Enter number of minutes..."
+        label="Minutes"
+      />
       {state.isTicking
          ? <Button onClick={_event => dispatch(Stop)}>
              {"Stop" |> React.string}
