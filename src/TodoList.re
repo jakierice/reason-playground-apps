@@ -61,29 +61,25 @@ let make = () => {
   let itemCount = List.length(items);
   let itemCountLabel = itemCount == 1 ? " item" : " items";
   <div className="TodoList">
-    <div className="Card">
-      <h2> {"Shit Jakie's Gotta Do" |> React.string} </h2>
-      // <button onClick={_event => dispatch(AddItem)}>
-      //   {"Add a todo" |> React.string}
-      // </button>
-      <Input onSubmit={text => dispatch(AddItem(text))} />
-      // <div className="Items"> {"Nothing" |> React.string} </div>
-      <div className="TodoItems">
-        {List.map(
-           item =>
-             <TodoItem
-               key={string_of_int(item.id)}
-               onToggle={() => dispatch(ToggleItem(item.id))}
-               item
-             />,
-           items,
-         )
-         |> Array.of_list
-         |> React.array}
-      </div>
-      <div className="Footer">
-        {string_of_int(itemCount) ++ itemCountLabel |> React.string}
-      </div>
-    </div>
+    <Card>
+        <h2> {"Shit Jakie's Gotta Do" |> React.string} </h2>
+        <Input onSubmit={text => dispatch(AddItem(text))} />
+        <div className="TodoItems">
+          {List.map(
+             item =>
+               <TodoItem
+                 key={string_of_int(item.id)}
+                 onToggle={() => dispatch(ToggleItem(item.id))}
+                 item
+               />,
+             items,
+           )
+           |> Array.of_list
+           |> React.array}
+        </div>
+        <div className="Footer">
+          {string_of_int(itemCount) ++ itemCountLabel |> React.string}
+        </div>
+    </Card>
   </div>;
 };

@@ -62,7 +62,7 @@ let make = () => {
   });
 
   <div className="PomodoroTimer">
-    <div className="Card">
+    <Card>
       <h2>
         {"There are "
          ++ formatTime(state.remainingSeconds)
@@ -82,6 +82,6 @@ let make = () => {
                {"Reset" |> React.string}
              </Button>
            </>}
-    </div>
+    </Card>
   </div>;
 };
