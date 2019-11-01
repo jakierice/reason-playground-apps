@@ -1,0 +1,7 @@
+.PomodoroTimer {
+  grid-column: 2;
+}
+
+.PomodoroTimer__Footer {
+  display: flex;
+}

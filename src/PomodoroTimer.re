@@ -1,3 +1,5 @@
+[%bs.raw {|require('./PomodoroTimer.css')|}];
+
 type state = {
   remainingSeconds: int,
   isTicking: bool,
@@ -9,13 +11,6 @@ type action =
   | SetTimerMinutes(string)
   | Reset
   | Tick;
-
-module Button = {
-  [@react.component]
-  let make = (~children, ~onClick) => {
-    <button onClick> children </button>;
-  };
-};
 
 let padNumber = numString =>
   if (numString |> int_of_string < 10) {
@@ -65,28 +60,35 @@ let make = () => {
   <div className="PomodoroTimer">
     <Card>
       <h2>
-        {"There are "
-         ++ formatTime(state.remainingSeconds)
-         ++ " on the clock!"
-         |> React.string}
+        {"There are " |> React.string}
+        <span className="EmphasizedText">
+          {formatTime(state.remainingSeconds) |> React.string}
+        </span>
+        {" minutes on the clock!" |> React.string}
       </h2>
+      // {"There are "
+      //  ++ formatTime(state.remainingSeconds)
+      //  ++ " minutes on the clock!"
+      //  |> React.string}
       <Input
         onSubmit={value => dispatch(SetTimerMinutes(value))}
         placeholder="Enter number of minutes..."
         label="Minutes"
       />
-      {state.isTicking
-         ? <Button onClick={_event => dispatch(Stop)}>
-             {"Stop" |> React.string}
-           </Button>
-         : <>
-             <Button onClick={_event => dispatch(Start)}>
-               {"Start" |> React.string}
+      <div className="PomodoroTimer__Footer">
+        {state.isTicking
+           ? <Button onClick={_event => dispatch(Stop)}>
+               {"Stop" |> React.string}
              </Button>
-             <Button onClick={_event => dispatch(Reset)}>
-               {"Reset" |> React.string}
-             </Button>
-           </>}
+           : <>
+               <Button onClick={_event => dispatch(Start)}>
+                 {"Start" |> React.string}
+               </Button>
+               <SecondaryButton onClick={_event => dispatch(Reset)}>
+                 {"Reset" |> React.string}
+               </SecondaryButton>
+             </>}
+      </div>
     </Card>
   </div>;
 };
