@@ -1,11 +1,12 @@
 type state = {
-  seconds: int,
+  remainingSeconds: int,
   isTicking: bool,
 };
 
 type action =
   | Start
   | Stop
+  | SetTimerMinutes(string)
   | Reset
   | Tick;
 
@@ -16,6 +17,23 @@ module Button = {
   };
 };
 
+let padNumber = numString =>
+  if (numString |> int_of_string < 10) {
+    "0" ++ numString;
+  } else {
+    numString;
+  };
+
+let formatTime = seconds => {
+  let mins = seconds / 60;
+  let minsString = mins |> string_of_int |> padNumber;
+  let seconds = seconds mod 60;
+  let secondsString = seconds |> string_of_int |> padNumber;
+  minsString ++ ":" ++ secondsString;
+};
+
+let convertMinutesToSeconds = minutes => minutes * 60;
+
 [@react.component]
 let make = () => {
   let (state, dispatch) =
@@ -25,13 +43,17 @@ let make = () => {
         switch (action) {
         | Start => {...state, isTicking: true}
         | Stop => {...state, isTicking: false}
-        | Reset => {...state, seconds: 30}
+        | SetTimerMinutes(minutes) => {...state, remainingSeconds: minutes |> int_of_string |> convertMinutesToSeconds}
+        | Reset => {...state, remainingSeconds: 30}
         | Tick =>
-          state.isTicking && state.seconds > 0
-            ? {...state, seconds: state.seconds - 1} : state
+          state.isTicking && state.remainingSeconds > 0
+            ? {...state, remainingSeconds: state.remainingSeconds - 1} : state
         },
       // initial state
-      {isTicking: false, seconds: 30},
+      {
+        isTicking: false,
+        remainingSeconds: convertMinutesToSeconds(45),
+      },
     );
 
   React.useEffect0(() => {
@@ -43,10 +65,11 @@ let make = () => {
     <div className="Card">
       <h2>
         {"There are "
-         ++ string_of_int(state.seconds)
+         ++ formatTime(state.remainingSeconds)
          ++ " on the clock!"
          |> React.string}
       </h2>
+      <Input onSubmit={(value) => dispatch(SetTimerMinutes(value))} />
       {state.isTicking
          ? <Button onClick={_event => dispatch(Stop)}>
              {"Stop" |> React.string}
