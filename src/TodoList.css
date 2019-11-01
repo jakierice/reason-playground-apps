@@ -1,41 +1,5 @@
-/* @embed base.css */
-/* reset */
-body {
-  box-sizing: border-box;
-  flex-shrink: 0;
-  font: 14px 'Century Gothic', Futura, sans-serif;
-}
-
-#root {
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-}
-
-.App {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: auto;
-}
-
 .TodoList {
   grid-column: 1;
-}
-
-.Card {
-  display: flex;
-  flex-direction: column;
-  width: 280px;
-  max-height: 600px;
-  flex: 1;
-  box-shadow: 0 2px 15px #ccc;
-  margin: 10px;
-  align-items: stretch;
-  padding: 1.2rem;
 }
 
 .TodoItems {
@@ -48,8 +12,4 @@ body {
 .TodoFooter {
   align-items: flex-start;
   padding: 5px 10px;
-}
-
-.PomodoroTimer {
-  grid-column: 2;
 }
