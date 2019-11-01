@@ -1,4 +1,4 @@
-[%bs.raw {|require('./index.css')|}];
+[%bs.raw {|require('./App.css')|}];
 
 module App = {
   [@react.component]
