@@ -43,7 +43,7 @@ let make = () => {
             remainingSeconds:
               minutes |> int_of_string |> convertMinutesToSeconds,
           }
-        | Reset => {...state, remainingSeconds: 30}
+        | Reset => {...state, remainingSeconds: convertMinutesToSeconds(45)}
         | Tick =>
           state.isTicking && state.remainingSeconds > 0
             ? {...state, remainingSeconds: state.remainingSeconds - 1} : state
