@@ -29,6 +29,13 @@ let formatTime = seconds => {
 
 let convertMinutesToSeconds = minutes => minutes * 60;
 
+let updateDocumentTitle: string => unit = [%bs.raw
+  {|
+  function updateDocumentTitle(remaining) {
+    document.title = "⏰ " + remaining;
+  }|}
+];
+
 [@react.component]
 let make = () => {
   let (state, dispatch) =
@@ -46,7 +53,11 @@ let make = () => {
         | Reset => {...state, remainingSeconds: convertMinutesToSeconds(45)}
         | Tick =>
           state.isTicking && state.remainingSeconds > 0
-            ? {...state, remainingSeconds: state.remainingSeconds - 1} : state
+            ? {
+              updateDocumentTitle(formatTime(state.remainingSeconds - 1));
+              {...state, remainingSeconds: state.remainingSeconds - 1};
+            }
+            : state
         },
       // initial state
       {isTicking: false, remainingSeconds: convertMinutesToSeconds(45)},
